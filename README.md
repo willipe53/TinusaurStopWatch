@@ -11,11 +11,22 @@ Most of my challenges getting this to work had to do with getting Arduino IDE on
 
 1. Added a 0.1 uF ceramic capacitor across MAX7219 `V+` and `GND`
 2. Added a 470 ohm resistor across MAX7219 `V+` and `ISET` to dim the LEDs a bit and save power
-3. Added reference to David Mellis ATTiny libary to the additional board manager URLs in Arduino IDE settings: `https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json`
-4. Did `brew install avrdude` so I had a programmer that could talk to the USB interface of the Tinusaur
-5. Even though I should be able to use `Sketch->Upload Using Programmer` in the Arduino IDE, I was only able to successfully upload the sketch to the Tinusaur by using the `Sketch->Export Compiled Binary` command and then running avrdude from the command line:
+3. Added reference to David Mellis ATTiny libary to the additional board manager URLs in Arduino IDE settings:
+
+```
+https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json
+```
+
+5. Did `brew install avrdude` so I had a programmer that could talk to the USB interface of the Tinusaur
+6. Even though I should be able to use `Sketch->Upload Using Programmer` in the Arduino IDE, I was only able to successfully upload the sketch to the Tinusaur by using the `Sketch->Export Compiled Binary` command and then running avrdude from the command line:
 
 ```zsh
 avrdude -v -c usbasp -p attiny85 -B 125kHz -U flash:w:/Users/willipe/github/TinusaurStopWatch/build/attiny.avr.ATtinyX5/TinusaurStopWatch.ino.hex:i
 ```
+7. Disabled the watchdog timer to prevent unexpected resets:
 
+```c
+MCUSR &= ~(1<<WDRF);
+WDTCR |= (1<<WDCE) | (1<<WDE);
+WDTCR = 0x00;
+```
