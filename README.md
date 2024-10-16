@@ -1,5 +1,5 @@
 # TinusaurStopWatch
-This is an SPI stopwatch using ATTiny85, MAX7219, and 7-segment LEDs that I created to get some familiarity with the [Tinusaur](https://tinusaur.org/) platform.  Code is straightforward:
+This is a [one file](./TinusaurStopWatch.ino) SPI stopwatch using ATTiny85, MAX7219, and 7-segment LEDs that I created to get some familiarity with the [Tinusaur](https://tinusaur.org/) platform.  Code is straightforward:
 
 * [LedControl](https://wayoda.github.io/LedControl/) by Eberhard Fahle to manage the MAX7219
 * [debounce](https://github.com/kimballa/button-debounce) by Aaron Kimball to handle button presses
