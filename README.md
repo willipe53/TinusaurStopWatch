@@ -30,3 +30,4 @@ MCUSR &= ~(1<<WDRF);
 WDTCR |= (1<<WDCE) | (1<<WDE);
 WDTCR = 0x00;
 ```
+![Circuit Diagram](./Tinusaur_schem.png)
